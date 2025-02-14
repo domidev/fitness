@@ -90,4 +90,6 @@ Jag använder mig utav filhantering i databasen för att kunna lagra träningspa
 
 pandas används för att sammanställa och analysera tränings- och måltidsdata.
 
-Summering av total tränad tid och kalorier ingår.
+Summering av totala kalorier ingår.
+
+Jag valde det som en del av mitt projekt för att kunna sammanställa all totala kalorier och för att jag tyckte att det var ett bra sätt att göra det på.
