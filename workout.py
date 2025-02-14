@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 from tkinter import simpledialog, messagebox, ttk, Toplevel, Button
 
+#Lägger till ett träningspass i databasen och GUI.
 def add_workout():
     date = simpledialog.askstring("Lägg till träningspass", "Ange datum (YYYY-MM-DD):")
     type = simpledialog.askstring("Lägg till träningspass", "Ange träningsaktivitet:")
@@ -16,41 +17,42 @@ def add_workout():
         conn.close()
         messagebox.showinfo("Success", "Träningspass tillagt!")
 
+#Tar bort markerad rad från databasen och GUI.
 def delete_selected(tree):
-    """Tar bort markerad rad från databasen och GUI."""
     selected_item = tree.selection()  # Hämtar markerad rad i Treeview
     if not selected_item:
         messagebox.showwarning("Ingen vald", "Vänligen välj en post att radera.")
         return
 
-    # Hämtar ID:t från den markerade raden
+#Hämtar ID:t från den markerade raden
     entry_id = tree.item(selected_item, "values")[0]
 
-    # Bekräfta borttagning
+#Bekräfta borttagning
     confirm = messagebox.askyesno("Bekräfta", f"Är du säker på att du vill radera ID {entry_id}?")
     if not confirm:
         return
 
-    # Radera från databasen
+#Radera från databasen
     conn = sqlite3.connect('fitness.db')
     c = conn.cursor()
     c.execute("DELETE FROM workouts WHERE id = ?", (entry_id,))
     conn.commit()
     conn.close()
 
-    # Radera från GUI
+#Radera från GUI
     tree.delete(selected_item)
     messagebox.showinfo("Lyckat", "Posten raderad!")
 
+#Visar träningspass i ett GUI och låter användaren radera poster.
 def view_workouts():
-    """Visar träningspass i ett GUI och låter användaren radera poster."""
+
     conn = sqlite3.connect('fitness.db')
     c = conn.cursor()
     c.execute("SELECT * FROM workouts")
     records = c.fetchall()
     conn.close()
     
-    # Skapa en Pandas DataFrame
+#Skapa en Pandas DataFrame
     df = pd.DataFrame(records, columns=["ID", "Datum", "Typ", "Varaktighet", "Kalorier"])
     
     view_win = Toplevel()
