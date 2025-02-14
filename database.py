@@ -1,5 +1,6 @@
 import sqlite3
 
+#Skapar databasen.
 def create_database():
     conn = sqlite3.connect('fitness.db')
     c = conn.cursor()
