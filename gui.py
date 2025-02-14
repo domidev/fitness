@@ -4,6 +4,8 @@ from workout import add_workout, view_workouts
 from meal import add_meal, view_meals
 from database import create_database
 
+
+#Skapar GUI och dess typsnitt och hur den ska se ut.
 def main_gui():
     create_database()
     root = tk.Tk()
