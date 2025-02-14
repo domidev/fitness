@@ -2,6 +2,7 @@ import sqlite3
 from tkinter import simpledialog, messagebox, ttk, Toplevel, Button
 import pandas as pd
 
+#Lägg till måltid
 def add_meal():
     date = simpledialog.askstring("Lägg till maträtt", "Ange datum (YYYY-MM-DD):")
     name = simpledialog.askstring("Lägg till maträtt", "Ange maträttens namn:")
@@ -18,6 +19,7 @@ def add_meal():
         conn.close()
         messagebox.showinfo("Lyckat", "Maträtt tillagd!")
 
+#Ta bort måltid
 def delete_meal(meal_id, tree):
     conn = sqlite3.connect('fitness.db')
     c = conn.cursor()
@@ -28,6 +30,7 @@ def delete_meal(meal_id, tree):
     tree.delete(*tree.get_children())
     view_meals()
 
+#Visa måltider
 def view_meals():
     conn = sqlite3.connect('fitness.db')
     c = conn.cursor()
