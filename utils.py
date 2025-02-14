@@ -1,6 +1,7 @@
 import sqlite3
 from tkinter import messagebox
 
+#Tar bort en post från databasen.
 def delete_entry(table, entry_id):
     conn = sqlite3.connect('fitness.db')
     c = conn.cursor()
